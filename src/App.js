@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import { DateRangePicker, LocalizationProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@material-ui/pickers/adapter/date-fns"; // choose your lib
 import { makeStyles } from "@material-ui/core";
+import moment from "moment";
 
 const useStyles = makeStyles({
   delimiter: {
@@ -11,12 +12,25 @@ const useStyles = makeStyles({
   }
 });
 
+const formats = {
+  normalDate: "dd/MM/yyy",
+  keyboardDate: "dd/MM/yyy"
+};
+
+const firstDayOfPreviousMonth = moment().subtract(1, "months").startOf("month");
+const lastDayOfNextMonth = moment().add(1, "months").endOf("month");
+
 const CustomDatePicker = () => {
-  const [selectedDate, setSelectedDate] = React.useState([null, null]);
-  console.log(selectedDate);
   const classes = useStyles();
+
+  const [selectedDate, setSelectedDate] = React.useState([
+    firstDayOfPreviousMonth.toDate(),
+    lastDayOfNextMonth.toDate()
+  ]);
+
+  console.log(selectedDate);
   return (
-    <LocalizationProvider dateAdapter={DateFnsUtils}>
+    <LocalizationProvider dateAdapter={DateFnsUtils} dateFormats={formats}>
       <DateRangePicker
         startText=""
         endText=""

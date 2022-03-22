@@ -1,10 +1,6 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import {
-  DateRangePicker,
-  DateRangeDelimiter,
-  LocalizationProvider
-} from "@material-ui/pickers";
+import { DateRangePicker, LocalizationProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@material-ui/pickers/adapter/date-fns"; // choose your lib
 import { makeStyles } from "@material-ui/core";
 
@@ -15,7 +11,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function BasicDateRangePicker() {
+const CustomDatePicker = () => {
   const [selectedDate, setSelectedDate] = React.useState([null, null]);
   console.log(selectedDate);
   const classes = useStyles();
@@ -36,4 +32,6 @@ export default function BasicDateRangePicker() {
       />
     </LocalizationProvider>
   );
-}
+};
+
+export default CustomDatePicker;
